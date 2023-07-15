@@ -4,7 +4,7 @@ import json
 import requests
 
 
-def count_words(subreddit, word_list, after="", count=[]):
+def count_words(subreddit, word_list):
     """ prints a sorted count of given keywords """
 
     if after == "":
