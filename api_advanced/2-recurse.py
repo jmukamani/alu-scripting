@@ -11,14 +11,18 @@ def recurse(subreddit, hot_list=[], after=""):
     response = requests.get(url, headers=header, params=param)
 
     if response.status_code != 200:
-	return None
+        return None
     else:
-	json_res = response.json()
-	after = json_res.get('data').get('after')
-	has_next = \
+        json_res = response.json()
+        # print(json_res.get('data').get('after'))
+        after = json_res.get('data').get('after')
+        has_next = \
             json_res.get('data').get('after') is not None
-	hot_articles = json_res.get('data').get('children')
+        # print(has_next)
+        hot_articles = json_res.get('data').get('children')
         [hot_list.append(article.get('data').get('title'))
          for article in hot_articles]
-	return recurse(subreddit, hot_list, after=after) \
+        # print(len(hot_list))
+        # print(hot_list)
+        return recurse(subreddit, hot_list, after=after) \
             if has_next else hot_list
