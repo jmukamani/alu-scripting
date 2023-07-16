@@ -6,14 +6,10 @@ import requests
 def recurse(subreddit, hot_list=[], after=""):
     """ returns list with titles of all hot articles in a subreddit """
     url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    params = {'after': after}
-    response = requests.get(
-                                url,
-                                headers=headers,
-                                params=params,
-                                allow_redirects=False
-                            )
+    header = {'User-Agent': 'Mozilla/5.0'}
+    param = {'after': after}
+    response = requests.get(url, headers=header, params=param)
+
     if response.status_code == 200:
         data = response.json().get('data')
         if data is not None:
